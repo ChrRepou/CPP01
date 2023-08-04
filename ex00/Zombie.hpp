@@ -12,6 +12,14 @@ class   Zombie {
     
     public:
         void announce( void );
+
+    Zombie( std::string ZombieName ){
+        this->name = ZombieName;
+    };
+
+    ~Zombie( void ){};
 };
+
+Zombie* newZombie( std::string name );
 
 #endif

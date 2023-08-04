@@ -13,13 +13,8 @@ class   Zombie {
     public:
         void announce( void );
 
-    Zombie( std::string ZombieName ){
-        this->name = ZombieName;
-    };
-
-    ~Zombie( void ){
-        std::cout << this->name << std::endl;
-    };
+    Zombie( std::string ZombieName );
+    ~Zombie( void );
 };
 
 Zombie* newZombie( std::string name );

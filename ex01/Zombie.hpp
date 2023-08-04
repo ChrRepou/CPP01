@@ -16,16 +16,9 @@ class   Zombie {
     public:
         void announce( void );
     
-    Zombie(){};
-
-    void    setZombieName(std::string ZombieName)
-    {
-        this->name = ZombieName;
-    }
-
-    ~Zombie( void ){
-        std::cout << this->name << std::endl;
-    };
+    Zombie( void );
+    void    setZombieName(std::string ZombieName);
+    ~Zombie( void );
 };
 
 Zombie* zombieHorde( int N, std::string name );

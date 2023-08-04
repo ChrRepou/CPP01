@@ -17,9 +17,12 @@ class   Zombie {
         this->name = ZombieName;
     };
 
-    ~Zombie( void ){};
+    ~Zombie( void ){
+        std::cout << this->name << std::endl;
+    };
 };
 
 Zombie* newZombie( std::string name );
+void    randomChump( std::string name );
 
 #endif

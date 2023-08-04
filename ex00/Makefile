@@ -14,6 +14,12 @@ main: $(OBJ)
 $(TARGET).o: $(TARGET).cpp $(TARGET).hpp
 	$(CC) $(CFLAGS) -c $(TARGET).cpp
 
+newZombie.o: newZombie.cpp $(TARGET).hpp
+	$(CC) $(CFLAGS) -c newZombie.cpp
+
+randomChump.o: randomChump.cpp $(TARGET).hpp
+	$(CC) $(CFLAGS) -c randomChump.cpp
+
 main.o: main.cpp	$(TARGET).hpp
 	$(CC) $(CFLAGS) -c main.cpp
 

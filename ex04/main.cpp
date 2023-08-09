@@ -1,34 +1,55 @@
 #include <iostream>
 #include <fstream>
 
-int main(int argc, char* argv[]) {
+int getInputFile(char *argv[], std::ifstream& inputFile)
+{
+    inputFile.open(argv[1]);
 
+    if (!inputFile.is_open()) {
+        std::cerr << "Could not open the file." << std::endl;
+        return 0;
+    }
+    return 1;
+}
+
+int createOutputFile(char *argv[], std::ofstream& outputFile)
+{
+    std::string extension = ".replace";
+    outputFile.open(argv[1] + extension);
+
+    if (!outputFile.is_open()) {
+        std::cerr << "Could not open the file." << std::endl;
+        return 0;
+    }
+    return 1;
+}
+
+int check_errors(int argc)
+{
     if (argc < 4 || argc > 4)
     {
         std::cout << "Error! Not the right amount of documents\n"
                   << "Correct format: ./main filename s1 s2" << std::endl;
         return 1;
     }
+    return 0;
+}
+
+int main(int argc, char* argv[]) {
+
+    if (check_errors(argc))
+        return 1;
 
     std::string s1 = argv[2];
     std::string s2 = argv[3];
 
     std::ifstream inputFile;
-    inputFile.open(argv[1]);
-
-    if (!inputFile.is_open()) {
-        std::cerr << "Could not open the file." << std::endl;
+    if (!getInputFile(argv, inputFile))
         return 1;
-    }
 
     std::ofstream outputFile;
-    std::string extension = ".replace";
-    outputFile.open(argv[1] + extension);
-
-    if (!outputFile.is_open()) {
-        std::cerr << "Could not open the file." << std::endl;
+    if (!createOutputFile(argv, outputFile))
         return 1;
-    }
 
     //indexes to check if a s1 exist in file
     long unsigned int start = 0;
@@ -71,8 +92,6 @@ int main(int argc, char* argv[]) {
                 keep_going = 0;
             }
         }
-        if (string_exists_in_line == 2)
-            std::cout << "the string: " << s1 << " exists in the line: " << line << " start index: " << start << " end index: " << end << std::endl;
         if (string_exists_in_line != 2)
             outputFile << line << std::endl;
         else
@@ -86,9 +105,8 @@ int main(int argc, char* argv[]) {
         }
     }
 
-
-
     inputFile.close();
     outputFile.close();
+    
     return 0;
 }

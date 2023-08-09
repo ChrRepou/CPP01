@@ -2,6 +2,8 @@
 #define HARL_H_
 
 #include <sstream>
+#include <iostream>
+#include <map>
 
 class   Harl{
     private:
@@ -11,6 +13,6 @@ class   Harl{
         void error( void );
     public:
         void complain( std::string level );
-}
+};
 
 #endif

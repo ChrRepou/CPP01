@@ -24,17 +24,30 @@ void Harl::error( void )
 
 void Harl::complain( std::string level )
 {
-    std::map<std::string, void (Harl::*)()> functionMap;
-    functionMap["debug"] = &Harl::debug;
-    functionMap["info"] = &Harl::info;
-    functionMap["warning"] = &Harl::warning;
-    functionMap["error"] = &Harl::error;
+    void (Harl::*functionArray[4])();
 
-    auto it = functionMap.find(level);
-    if (it == functionMap.end())
+    functionArray[0] = &Harl::debug;
+    functionArray[1] = &Harl::info;
+    functionArray[2] = &Harl::warning;
+    functionArray[3] = &Harl::error;
+
+    std::string levelsArray[4];
+    levelsArray[0] = "debug";
+    levelsArray[1] = "info";
+    levelsArray[2] = "warning";
+    levelsArray[3] = "error";
+
+    int i;
+    for (i = 0; i < 4; i++)
+    {
+        if (levelsArray[i] == level)
+            break;
+    }
+
+    if (i > 3)
     {
         std::cout << "level: \"" << level << "\" doesn't exist" << std::endl;
         return;
     }
-    (this->*functionMap[level])();
+    (this->*functionArray[i])();
 };
